@@ -1,0 +1,45 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" />
+      <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+        Username is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+        Password is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="password" formControlName="confirmPassword" />
+      <mat-error *ngIf="loginForm.hasError('passwordsDoNotMatch')">
+        Passwords do not match!
+      </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="rememberMe">Remember Me</mat-checkbox>
+    <img [src]="captcha ? 'data:image/png;base64,' + captcha.captcha : ''" alt="CAPTCHA Image" *ngIf="captcha" />
+    <div class="refresh-btn" (click)="refreshCaptcha()">
+      <mat-icon>refresh</mat-icon>
+    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>CAPTCHA</mat-label>
+      <input matInput formControlName="captchaInput" placeholder="Enter CAPTCHA" />
+      <mat-error *ngIf="loginForm.get('captchaInput')?.hasError('required')">
+        CAPTCHA is required.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="btn-style">
+      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+    </div>
+  </form>
+</div>

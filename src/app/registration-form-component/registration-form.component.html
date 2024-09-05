@@ -1,0 +1,90 @@
+<div class="registration-container">
+    <h2>Registration Form</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="onRegister()">
+
+        <div class="form-container">
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" />
+                <mat-error
+                    *ngIf="registrationForm.get('firstName')?.hasError('required') && registrationForm.get('firstName')?.touched">
+                    First Name is required.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" />
+                <mat-error
+                    *ngIf="registrationForm.get('lastName')?.hasError('required') && registrationForm.get('lastName')?.touched">
+                    Last Name is required.
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-container">
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>Phone Number</mat-label>
+                <input matInput formControlName="phoneNumber" />
+                <mat-error
+                    *ngIf="registrationForm.get('phoneNumber')?.hasError('required') && registrationForm.get('phoneNumber')?.touched">
+                    Phone Number is required.
+                </mat-error>
+                <mat-error
+                    *ngIf="registrationForm.get('phoneNumber')?.hasError('pattern') && registrationForm.get('phoneNumber')?.touched">
+                    Invalid phone number format. Use 09XXXXXXXXX.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" color="accent">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" />
+                <mat-error
+                    *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched">
+                    Email is required.
+                </mat-error>
+                <mat-error
+                    *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched">
+                    Invalid email format.
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="btn-container">
+            <button mat-raised-button color="primary" type="submit" [disabled]="registrationForm.invalid">
+                Register
+            </button>
+        </div>
+
+    </form>
+
+    <br>
+
+    <h2>Registered Users</h2>
+
+    <table mat-table [dataSource]="registeredUsers" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef> First Name </th>
+            <td mat-cell *matCellDef="let user"> {{ user.firstName }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef> Last Name </th>
+            <td mat-cell *matCellDef="let user"> {{ user.lastName }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+            <td mat-cell *matCellDef="let user"> {{ user.phoneNumber }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let user"> {{ user.email }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
