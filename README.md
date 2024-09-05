@@ -1,5 +1,5 @@
 🌟 Project Overview
-This Angular application provides a basic user interface for a login and registration flow. The main features include a login page and a registration form that users can access after successful login. The application is designed to be modular, allowing for easy integration of backend services like CAPTCHA verification and JWT authentication.
+This Angular application, written with Angular 18, provides a basic user interface for a login and registration flow. The main features include a login page and a registration form that users can access after successful login. The application is designed to be modular, allowing for easy integration of backend services like CAPTCHA verification and JWT authentication.
 
 ✨ Features:
 🔐 Login Page: A basic form for users to log in.
